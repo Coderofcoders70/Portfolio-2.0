@@ -211,7 +211,7 @@ function App() {
           {/* 6. TECH STACK CARD (2x1) */}
           <Card className="md:col-span-2 md:row-span-1 flex flex-col justify-center gap-4">
             <div className="flex justify-between items-center">
-              <h3 className="text-slate-400 text-sm font-bold uppercase tracking-wider">My Arsenal</h3>
+              <h3 className="text-slate-400 text-sm font-bold uppercase tracking-wider">My Tech Stack</h3>
               <span className="text-xs text-slate-500">Hover to activate</span>
             </div>
 
@@ -232,21 +232,25 @@ function App() {
               {/* Mongo - Green Glow */}
               <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
                 <SiMongodb className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-green-400 group-hover/icon:scale-110" />
+                <span className="text-xs text-slate-500 group-hover/icon:text-green-400 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">MongoDB</span>
               </div>
 
               {/* Tailwind - Sky Glow */}
               <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
                 <SiTailwindcss className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-sky-400 group-hover/icon:scale-110" />
+                <span className="text-xs text-slate-500 group-hover/icon:text-sky-400 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">Tailwind CSS</span>
               </div>
 
               {/* TypeScript - Blue Glow */}
               <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
                 <SiTypescript className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-blue-500 group-hover/icon:scale-110" />
+                <span className="text-xs text-slate-500 group-hover/icon:text-blue-500 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">TypeScript</span>
               </div>
 
               {/* Gemini/Google - Orange Glow */}
               <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
                 <SiGoogle className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-orange-400 group-hover/icon:scale-110" />
+                <span className="text-xs text-slate-500 group-hover/icon:text-orange-400 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">Gemini</span>
               </div>
 
             </div>
