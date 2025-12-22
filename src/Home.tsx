@@ -170,7 +170,7 @@ function Home() {
           <p className="text-xs text-slate-500">Remote Ready</p>
         </Card>
 
-        {/* 5. SEE MY PROJECTS (Fixed) */}
+        {/* 5. SEE MY PROJECTS */}
         <Card variants={itemVariants} className="md:col-span-2 md:row-span-2 group cursor-pointer">
           <Link to="/projects" className="h-full w-full flex items-center justify-center relative overflow-hidden">
 
@@ -214,7 +214,7 @@ function Home() {
           </div>
         </Card>
 
-        {/* 7. CONTACT LINK CARD (Updated to link to Contact Page) */}
+        {/* 7. CONTACT LINK CARD */}
         <Card variants={itemVariants} className="md:col-span-1 md:row-span-1 bg-gradient-to-br from-purple-600 to-indigo-600 border-none relative overflow-hidden group">
           <Link to="/contact" className="h-full w-full flex flex-col justify-between p-1">
             <div className="flex justify-end">
