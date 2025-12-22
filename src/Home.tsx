@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useMemo } from "react";
+import Card from "./Card";
+import { MatrixText } from "./components/MatrixText";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom"; // We use Link instead of <a href> for internal pages
-import Card from "./Card";
 import { FiMapPin } from "react-icons/fi";
+import React, { useState, useEffect, useMemo } from "react";
 import { SiReact, SiNodedotjs, SiMongodb, SiTailwindcss, SiTypescript, SiGoogle } from "react-icons/si";
 
 
@@ -11,7 +12,7 @@ const phrases = ["Lakshaya Sharma", "Full Stack Developer", "Backend Developer",
 function Home() {
   const [aboutMode, setAboutMode] = useState<'work' | 'life'>('work');
 
-// --- TYPEWRITER LOGIC START ---
+  // --- TYPEWRITER LOGIC START ---
   const [text, setText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
@@ -22,8 +23,8 @@ function Home() {
       const i = loopNum % phrases.length;
       const fullText = phrases[i];
 
-      setText(isDeleting 
-        ? fullText.substring(0, text.length - 1) 
+      setText(isDeleting
+        ? fullText.substring(0, text.length - 1)
         : fullText.substring(0, text.length + 1)
       );
 
@@ -32,7 +33,7 @@ function Home() {
 
       if (!isDeleting && text === fullText) {
         // Finished typing phrase, wait a bit then start deleting
-        setTimeout(() => setIsDeleting(true), 1500); 
+        setTimeout(() => setIsDeleting(true), 1500);
       } else if (isDeleting && text === '') {
         // Finished deleting, switch to next phrase
         setIsDeleting(false);
@@ -42,7 +43,7 @@ function Home() {
 
     const timer = setTimeout(handleType, typingSpeed);
     return () => clearTimeout(timer);
-    
+
   }, [text, isDeleting, loopNum, typingSpeed]);
   // --- TYPEWRITER LOGIC END ---
 
@@ -63,7 +64,7 @@ function Home() {
         {/* 1. HERO Card (Updated) */}
         <Card variants={itemVariants} className="md:col-span-2 md:row-span-2 flex flex-col relative overflow-hidden group">
           <div className="absolute -right-20 -top-20 w-64 h-64 bg-cyan-500/20 rounded-full blur-3xl pointer-events-none" />
-          
+
           <div className="flex justify-between items-start z-10">
             {/* Status Badge */}
             <div className="flex flex-col gap-2">
@@ -83,11 +84,11 @@ function Home() {
           </div>
 
 
-        <div className="mt-auto z-10">
+          <div className="mt-auto z-10">
             {/* UPDATED TYPEWRITER SECTION */}
             <h3 className="text-lg font-mono text-cyan-400 mb-2 font-bold min-h-[28px]">
-            Hi, I am <span className="text-cyan-400">{text}</span>
-            <span className="animate-pulse text-cyan-400">|</span>
+              Hi, I am <span className="text-cyan-400">{text}</span>
+              <span className="animate-pulse text-cyan-400">|</span>
             </h3>
 
             <h1 className="text-4xl md:text-5xl font-bold leading-tight">
@@ -109,10 +110,10 @@ function Home() {
                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 11L11 1M11 1H1M11 1V11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
               </button>
             </Link>
-            
+
             {/* RESUME DOWNLOAD BUTTON */}
-            <a 
-              href="src/assets/my-Resume/Lakshaya_Sharma_FullStackDeveloper.pdf" 
+            <a
+              href="src/assets/my-Resume/Lakshaya_Sharma_FullStackDeveloper.pdf"
               download="Lakshaya_Sharma_Resume.pdf"
               className="px-5 py-2.5 rounded-full font-bold text-sm text-slate-300 border border-white/10 hover:bg-white/5 transition-colors cursor-pointer"
             >
@@ -121,7 +122,7 @@ function Home() {
           </div>
         </Card>
 
-        {/* 2. ABOUT ME CARD */}
+        {/* 2. ABOUT ME CARD (Updated with Matrix Effect) */}
         <Card variants={itemVariants} className="md:col-span-1 md:row-span-2 flex flex-col">
           <div className="flex justify-between items-center mb-6">
             <h3 className="font-bold text-slate-200">About Me</h3>
@@ -134,8 +135,12 @@ function Home() {
             {aboutMode === 'work' ? (
               <div key="work" className="animate-in fade-in slide-in-from-bottom-2 duration-300">
                 <p className="text-slate-400 leading-relaxed mb-4">I am a <span className="text-white font-bold">Full Stack Engineer</span> focused on scalable backends and intuitive frontend architectures.</p>
-                <div className="mt-4 p-3 bg-slate-800/50 rounded-lg border border-white/5">
-                  <p className="text-xs text-slate-500 font-mono">Current Focus: <br /> <span className="text-green-400">System Design & AI Agents</span></p>
+                <div className="mt-4 p-4 bg-slate-900 rounded-lg border border-green-500/20 shadow-[0_0_15px_-5px_rgba(34,197,94,0.1)]">
+                  <p className="text-xs text-slate-500 font-mono mb-2 uppercase tracking-wider">Current Focus:</p>
+                  {/* Using the Matrix Component Here */}
+                  <div className="min-h-[24px]">
+                    <MatrixText />
+                  </div>
                 </div>
               </div>
             ) : (
@@ -166,33 +171,33 @@ function Home() {
 
         {/* 5. DASHBOARD PROJECT */}
         <Card variants={itemVariants} className="md:col-span-2 md:row-span-2 flex flex-col justify-between group">
-           <div className="flex justify-between items-start mb-4 relative z-10">
-              <div><h2 className="text-2xl font-bold text-slate-100">Smart Bot</h2><p className="text-sm text-slate-500 mt-1">MERN Stack • Gemini API • Socket.io</p></div>
-              <div className="flex items-center gap-2 px-2 py-1 bg-green-500/10 border border-green-500/20 rounded-md"><div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" /><span className="text-xs font-bold text-green-400">V1.0 Live</span></div>
-           </div>
-           {/* Browser Window UI */}
-           <div className="relative w-full h-64 md:h-full bg-slate-900 rounded-t-xl border-t border-l border-r border-white/10 overflow-hidden shadow-2xl mt-4 group-hover:translate-y-[-5px] transition-transform duration-500">
-              <div className="h-8 bg-slate-800 border-b border-white/5 flex items-center px-3 gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-red-500/20" /><div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20" /><div className="w-2.5 h-2.5 rounded-full bg-green-500/20" /></div>
-              <div className="relative w-full h-full bg-slate-950 flex flex-col p-4">
-                 <div className="flex flex-col gap-3">
-                    <div className="self-end bg-cyan-600/20 text-cyan-200 px-4 py-2 rounded-2xl rounded-tr-sm text-xs max-w-[80%]">Analyze user retention.</div>
-                    <div className="self-start bg-slate-800 text-slate-300 px-4 py-2 rounded-2xl rounded-tl-sm text-xs max-w-[90%]"><span className="text-purple-400 font-bold text-[10px] block mb-1">GEMINI AI</span>Retention is up by 15%.</div>
-                 </div>
+          <div className="flex justify-between items-start mb-4 relative z-10">
+            <div><h2 className="text-2xl font-bold text-slate-100">Smart Bot</h2><p className="text-sm text-slate-500 mt-1">MERN Stack • Gemini API • Socket.io</p></div>
+            <div className="flex items-center gap-2 px-2 py-1 bg-green-500/10 border border-green-500/20 rounded-md"><div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" /><span className="text-xs font-bold text-green-400">V1.0 Live</span></div>
+          </div>
+          {/* Browser Window UI */}
+          <div className="relative w-full h-64 md:h-full bg-slate-900 rounded-t-xl border-t border-l border-r border-white/10 overflow-hidden shadow-2xl mt-4 group-hover:translate-y-[-5px] transition-transform duration-500">
+            <div className="h-8 bg-slate-800 border-b border-white/5 flex items-center px-3 gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-red-500/20" /><div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20" /><div className="w-2.5 h-2.5 rounded-full bg-green-500/20" /></div>
+            <div className="relative w-full h-full bg-slate-950 flex flex-col p-4">
+              <div className="flex flex-col gap-3">
+                <div className="self-end bg-cyan-600/20 text-cyan-200 px-4 py-2 rounded-2xl rounded-tr-sm text-xs max-w-[80%]">Analyze user retention.</div>
+                <div className="self-start bg-slate-800 text-slate-300 px-4 py-2 rounded-2xl rounded-tl-sm text-xs max-w-[90%]"><span className="text-purple-400 font-bold text-[10px] block mb-1">GEMINI AI</span>Retention is up by 15%.</div>
               </div>
-           </div>
+            </div>
+          </div>
         </Card>
 
         {/* 6. TECH STACK */}
         <Card variants={itemVariants} className="md:col-span-2 md:row-span-1 flex flex-col justify-center gap-4">
-           <div className="flex justify-between items-center"><h3 className="text-slate-400 text-sm font-bold uppercase tracking-wider">Tech Stack</h3></div>
-           <div className="flex flex-wrap gap-4 justify-start">
-             <SiReact className="text-3xl text-slate-600 hover:text-cyan-400 transition-colors"/>
-             <SiNodedotjs className="text-3xl text-slate-600 hover:text-green-500 transition-colors"/>
-             <SiMongodb className="text-3xl text-slate-600 hover:text-green-400 transition-colors"/>
-             <SiTailwindcss className="text-3xl text-slate-600 hover:text-sky-400 transition-colors"/>
-             <SiTypescript className="text-3xl text-slate-600 hover:text-blue-500 transition-colors"/>
-             <SiGoogle className="text-3xl text-slate-600 hover:text-orange-400 transition-colors"/>
-           </div>
+          <div className="flex justify-between items-center"><h3 className="text-slate-400 text-sm font-bold uppercase tracking-wider">Tech Stack</h3></div>
+          <div className="flex flex-wrap gap-4 justify-start">
+            <SiReact className="text-3xl text-slate-600 hover:text-cyan-400 transition-colors" />
+            <SiNodedotjs className="text-3xl text-slate-600 hover:text-green-500 transition-colors" />
+            <SiMongodb className="text-3xl text-slate-600 hover:text-green-400 transition-colors" />
+            <SiTailwindcss className="text-3xl text-slate-600 hover:text-sky-400 transition-colors" />
+            <SiTypescript className="text-3xl text-slate-600 hover:text-blue-500 transition-colors" />
+            <SiGoogle className="text-3xl text-slate-600 hover:text-orange-400 transition-colors" />
+          </div>
         </Card>
 
         {/* 7. CONTACT LINK CARD (Updated to link to Contact Page) */}
