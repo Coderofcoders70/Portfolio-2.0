@@ -1,8 +1,9 @@
 import Card from "./Card";
-import { MatrixText } from "./components/MatrixText";
+import CoffeeCard from "./pages/CoffeeCard";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom"; // We use Link instead of <a href> for internal pages
 import { FiMapPin } from "react-icons/fi";
+import { MatrixText } from "./components/MatrixText";
 import React, { useState, useEffect, useMemo } from "react";
 import { SiReact, SiNodedotjs, SiMongodb, SiTailwindcss, SiTypescript, SiGoogle } from "react-icons/si";
 
@@ -221,6 +222,9 @@ function Home() {
           <div className="flex justify-between items-end mb-2"><h3 className="font-bold text-xl text-slate-200">Next.js 15</h3><span className="text-xs text-cyan-400 font-bold">75%</span></div>
           <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden border border-white/5"><div className="bg-gradient-to-r from-cyan-500 to-blue-500 h-full w-[75%] animate-pulse" /></div>
         </Card>
+
+        {/* 9. COFFEE BREAK CARD (New Addition) */}
+        <CoffeeCard className="md:col-span-2 md:row-span-1" />
 
       </motion.div>
     </div>
