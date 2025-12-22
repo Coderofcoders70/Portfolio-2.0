@@ -203,14 +203,47 @@ function Home() {
 
         {/* 6. TECH STACK */}
         <Card variants={itemVariants} className="md:col-span-2 md:row-span-1 flex flex-col justify-center gap-4">
-          <div className="flex justify-between items-center"><h3 className="text-slate-400 text-sm font-bold uppercase tracking-wider">Tech Stack</h3></div>
-          <div className="flex flex-wrap gap-4 justify-start">
-            <SiReact className="text-3xl text-slate-600 hover:text-cyan-400 transition-colors" />
-            <SiNodedotjs className="text-3xl text-slate-600 hover:text-green-500 transition-colors" />
-            <SiMongodb className="text-3xl text-slate-600 hover:text-green-400 transition-colors" />
-            <SiTailwindcss className="text-3xl text-slate-600 hover:text-sky-400 transition-colors" />
-            <SiTypescript className="text-3xl text-slate-600 hover:text-blue-500 transition-colors" />
-            <SiGoogle className="text-3xl text-slate-600 hover:text-orange-400 transition-colors" />
+          <div className="flex justify-between items-center">
+            <h3 className="text-slate-400 text-sm font-bold uppercase tracking-wider">
+              Tech Stack
+            </h3>
+          </div>
+          <div className="flex flex-wrap mt-8 gap-4 justify-start">
+              {/* React - Cyan Glow */}
+              <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
+                <SiReact className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-cyan-400 group-hover/icon:scale-110 group-hover/icon:drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]" />
+                <span className="text-xs text-slate-500 group-hover/icon:text-cyan-300 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">React</span>
+              </div>
+
+              {/* Node - Green Glow */}
+              <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
+                <SiNodedotjs className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-green-500 group-hover/icon:scale-110 group-hover/icon:drop-shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
+                <span className="text-xs text-slate-500 group-hover/icon:text-green-400 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">Node</span>
+              </div>
+
+              {/* Mongo - Green Glow */}
+              <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
+                <SiMongodb className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-green-400 group-hover/icon:scale-110" />
+                <span className="text-xs text-slate-500 group-hover/icon:text-green-400 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">MongoDB</span>
+              </div>
+
+              {/* Tailwind - Sky Glow */}
+              <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
+                <SiTailwindcss className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-sky-400 group-hover/icon:scale-110" />
+                <span className="text-xs text-slate-500 group-hover/icon:text-sky-400 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">Tailwind CSS</span>
+              </div>
+
+              {/* TypeScript - Blue Glow */}
+              <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
+                <SiTypescript className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-blue-500 group-hover/icon:scale-110" />
+                <span className="text-xs text-slate-500 group-hover/icon:text-blue-500 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">TypeScript</span>
+              </div>
+
+              {/* Gemini/Google - Orange Glow */}
+              <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
+                <SiGoogle className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-orange-400 group-hover/icon:scale-110" />
+                <span className="text-xs text-slate-500 group-hover/icon:text-orange-400 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">Gemini</span>
+              </div>
           </div>
         </Card>
 
