@@ -136,6 +136,9 @@ function Home() {
             {aboutMode === 'work' ? (
               <div key="work" className="animate-in fade-in slide-in-from-bottom-2 duration-300">
                 <p className="text-slate-400 leading-relaxed mb-4">I am a <span className="text-white font-bold">Full Stack Engineer</span> focused on scalable backends and intuitive frontend architectures.</p>
+                <p className="text-slate-400 leading-relaxed">
+                  My strength lies in bridging the gap between <span className="text-cyan-400">complex logic</span> and <span className="text-purple-400">pixel-perfect design</span>.
+                </p>
                 <div className="mt-4 p-4 bg-slate-900 rounded-lg border border-green-500/20 shadow-[0_0_15px_-5px_rgba(34,197,94,0.1)]">
                   <p className="text-xs text-slate-500 font-mono mb-2 uppercase tracking-wider">Current Focus:</p>
                   {/* Using the Matrix Component Here */}
@@ -147,7 +150,10 @@ function Home() {
             ) : (
               <div key="life" className="animate-in fade-in slide-in-from-bottom-2 duration-300">
                 <p className="text-slate-400 leading-relaxed mb-4">When I'm not coding, I'm usually exploring <span className="text-orange-400">new tech trends</span> or refining my UI/UX taste.</p>
-                <ul className="mt-4 space-y-2 text-sm text-slate-500"><li>🎧 Lo-fi Music Playlists</li><li>☕ Black Coffee</li></ul>
+                <p className="text-slate-400 leading-relaxed">
+                  I believe in <span className="text-white italic">"Shipping fast and breaking things"</span> (but fixing them faster).
+                </p>
+                <ul className="mt-4 space-y-2 text-sm text-slate-500"><li>🎧 Lo-fi Music Playlists</li><li>☕ Black Coffee</li><li>🚀 Startup Enthusiast</li></ul>
               </div>
             )}
           </div>
@@ -209,41 +215,41 @@ function Home() {
             </h3>
           </div>
           <div className="flex flex-wrap mt-8 gap-4 justify-start">
-              {/* React - Cyan Glow */}
-              <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
-                <SiReact className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-cyan-400 group-hover/icon:scale-110 group-hover/icon:drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]" />
-                <span className="text-xs text-slate-500 group-hover/icon:text-cyan-300 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">React</span>
-              </div>
+            {/* React - Cyan Glow */}
+            <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
+              <SiReact className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-cyan-400 group-hover/icon:scale-110 group-hover/icon:drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]" />
+              <span className="text-xs text-slate-500 group-hover/icon:text-cyan-300 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">React</span>
+            </div>
 
-              {/* Node - Green Glow */}
-              <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
-                <SiNodedotjs className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-green-500 group-hover/icon:scale-110 group-hover/icon:drop-shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
-                <span className="text-xs text-slate-500 group-hover/icon:text-green-400 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">Node</span>
-              </div>
+            {/* Node - Green Glow */}
+            <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
+              <SiNodedotjs className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-green-500 group-hover/icon:scale-110 group-hover/icon:drop-shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
+              <span className="text-xs text-slate-500 group-hover/icon:text-green-400 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">Node</span>
+            </div>
 
-              {/* Mongo - Green Glow */}
-              <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
-                <SiMongodb className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-green-400 group-hover/icon:scale-110" />
-                <span className="text-xs text-slate-500 group-hover/icon:text-green-400 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">MongoDB</span>
-              </div>
+            {/* Mongo - Green Glow */}
+            <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
+              <SiMongodb className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-green-400 group-hover/icon:scale-110" />
+              <span className="text-xs text-slate-500 group-hover/icon:text-green-400 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">MongoDB</span>
+            </div>
 
-              {/* Tailwind - Sky Glow */}
-              <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
-                <SiTailwindcss className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-sky-400 group-hover/icon:scale-110" />
-                <span className="text-xs text-slate-500 group-hover/icon:text-sky-400 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">Tailwind CSS</span>
-              </div>
+            {/* Tailwind - Sky Glow */}
+            <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
+              <SiTailwindcss className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-sky-400 group-hover/icon:scale-110" />
+              <span className="text-xs text-slate-500 group-hover/icon:text-sky-400 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">Tailwind CSS</span>
+            </div>
 
-              {/* TypeScript - Blue Glow */}
-              <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
-                <SiTypescript className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-blue-500 group-hover/icon:scale-110" />
-                <span className="text-xs text-slate-500 group-hover/icon:text-blue-500 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">TypeScript</span>
-              </div>
+            {/* TypeScript - Blue Glow */}
+            <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
+              <SiTypescript className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-blue-500 group-hover/icon:scale-110" />
+              <span className="text-xs text-slate-500 group-hover/icon:text-blue-500 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">TypeScript</span>
+            </div>
 
-              {/* Gemini/Google - Orange Glow */}
-              <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
-                <SiGoogle className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-orange-400 group-hover/icon:scale-110" />
-                <span className="text-xs text-slate-500 group-hover/icon:text-orange-400 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">Gemini</span>
-              </div>
+            {/* Gemini/Google - Orange Glow */}
+            <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
+              <SiGoogle className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-orange-400 group-hover/icon:scale-110" />
+              <span className="text-xs text-slate-500 group-hover/icon:text-orange-400 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">Gemini</span>
+            </div>
           </div>
         </Card>
 
