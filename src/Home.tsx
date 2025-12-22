@@ -2,7 +2,7 @@ import Card from "./Card";
 import CoffeeCard from "./pages/CoffeeCard";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom"; // We use Link instead of <a href> for internal pages
-import { FiMapPin } from "react-icons/fi";
+import { FiMapPin, FiArrowRight } from "react-icons/fi";
 import { MatrixText } from "./components/MatrixText";
 import React, { useState, useEffect, useMemo } from "react";
 import { SiReact, SiNodedotjs, SiMongodb, SiTailwindcss, SiTypescript, SiGoogle } from "react-icons/si";
@@ -170,22 +170,35 @@ function Home() {
           <p className="text-xs text-slate-500">Remote Ready</p>
         </Card>
 
-        {/* 5. DASHBOARD PROJECT */}
-        <Card variants={itemVariants} className="md:col-span-2 md:row-span-2 flex flex-col justify-between group">
-          <div className="flex justify-between items-start mb-4 relative z-10">
-            <div><h2 className="text-2xl font-bold text-slate-100">Smart Bot</h2><p className="text-sm text-slate-500 mt-1">MERN Stack • Gemini API • Socket.io</p></div>
-            <div className="flex items-center gap-2 px-2 py-1 bg-green-500/10 border border-green-500/20 rounded-md"><div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" /><span className="text-xs font-bold text-green-400">V1.0 Live</span></div>
-          </div>
-          {/* Browser Window UI */}
-          <div className="relative w-full h-64 md:h-full bg-slate-900 rounded-t-xl border-t border-l border-r border-white/10 overflow-hidden shadow-2xl mt-4 group-hover:translate-y-[-5px] transition-transform duration-500">
-            <div className="h-8 bg-slate-800 border-b border-white/5 flex items-center px-3 gap-1.5"><div className="w-2.5 h-2.5 rounded-full bg-red-500/20" /><div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20" /><div className="w-2.5 h-2.5 rounded-full bg-green-500/20" /></div>
-            <div className="relative w-full h-full bg-slate-950 flex flex-col p-4">
-              <div className="flex flex-col gap-3">
-                <div className="self-end bg-cyan-600/20 text-cyan-200 px-4 py-2 rounded-2xl rounded-tr-sm text-xs max-w-[80%]">Analyze user retention.</div>
-                <div className="self-start bg-slate-800 text-slate-300 px-4 py-2 rounded-2xl rounded-tl-sm text-xs max-w-[90%]"><span className="text-purple-400 font-bold text-[10px] block mb-1">GEMINI AI</span>Retention is up by 15%.</div>
+        {/* 5. SEE MY PROJECTS (Fixed) */}
+        <Card variants={itemVariants} className="md:col-span-2 md:row-span-2 group cursor-pointer">
+          <Link to="/projects" className="h-full w-full flex items-center justify-center relative overflow-hidden">
+
+            {/* Background: Subtle animated gradient */}
+            <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-950 to-black z-0" />
+            <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 z-0" />
+
+            {/* The Text */}
+            <div className="relative z-10 text-center">
+              <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase">
+                {/* Replaced broken GIF with a reliable Gradient Text */}
+                <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 animate-pulse">
+                  See My
+                </span>
+                <br />
+                <span className="text-white drop-shadow-2xl">
+                  Projects
+                </span>
+              </h2>
+
+              {/* Decorative Arrow */}
+              <div className="mt-4 flex justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
+                <div className="bg-white text-black px-6 py-2 rounded-full font-bold flex items-center gap-2">
+                  View All <FiArrowRight />
+                </div>
               </div>
             </div>
-          </div>
+          </Link>
         </Card>
 
         {/* 6. TECH STACK */}
