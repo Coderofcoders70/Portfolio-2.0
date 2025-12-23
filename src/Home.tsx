@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { Link } from "react-router-dom"; // We use Link instead of <a href> for internal pages
 import { FiMapPin, FiArrowRight } from "react-icons/fi";
 import { MatrixText } from "./components/MatrixText";
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { SiReact, SiNodedotjs, SiMongodb, SiTailwindcss, SiTypescript, SiGoogle } from "react-icons/si";
 
 
