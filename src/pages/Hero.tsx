@@ -54,7 +54,7 @@ export function Hero() {
                     </div>
 
                     <div className="relative w-20 h-20 md:w-30 md:h-30 rounded-full border-2 border-white/10 bg-white/5 overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_-5px_rgba(34,211,238,0.6)]">
-                        <img src="/src/assets/my-photo.png" alt="Profile" className="object-cover w-full h-full" />
+                        <img src="src/assets/my-photo.png" alt="Profile" className="object-cover w-full h-full" />
                     </div>
                 </div>
 
