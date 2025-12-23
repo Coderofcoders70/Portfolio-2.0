@@ -85,7 +85,7 @@ const Contact = () => {
              <div className="h-full flex flex-col items-center justify-center text-center animate-in fade-in zoom-in duration-300">
                <FiCheckCircle className="text-5xl text-green-500 mb-4" />
                <h2 className="text-2xl font-bold text-white">Message Sent!</h2>
-               <p className="text-slate-400 mt-2">I've added it to my sheet.</p>
+               <p className="text-slate-400 mt-2">Thank you! We'll catch up soon</p>
                <button 
                  onClick={() => setSubmitted(false)}
                  className="mt-6 text-sm text-cyan-400 hover:text-cyan-300 underline"

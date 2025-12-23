@@ -21,7 +21,7 @@ function Home() {
   // --- EASTER EGG STATE ---
   const [isPartyMode, setIsPartyMode] = useState(false);
   const [keySequence, setKeySequence] = useState<string[]>([]);
-  const SECRET_CODE = "LAKSHAY";
+  const SECRET_CODE = "LAKSHAYA";
 
   // --- TYPEWRITER LOGIC ---
   useEffect(() => {
