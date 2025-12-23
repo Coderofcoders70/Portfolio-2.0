@@ -1,11 +1,12 @@
 import Card from "./Card";
 import CoffeeCard from "./pages/CoffeeCard";
+import RoboGuide from "./components/RoboGuide"
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom"; // We use Link instead of <a href> for internal pages
 import { FiMapPin, FiArrowRight } from "react-icons/fi";
 import { MatrixText } from "./components/MatrixText";
 import React, { useState, useEffect } from "react";
-import { SiReact, SiNodedotjs, SiMongodb, SiTailwindcss, SiTypescript, SiGoogle } from "react-icons/si";
+import { SiReact, SiNodedotjs, SiMongodb, SiTailwindcss, SiJavascript, SiTypescript, SiGoogle } from "react-icons/si";
 
 
 const phrases = ["Lakshaya Sharma", "Full Stack Developer", "Backend Developer", "AI-Enthusiast"];
@@ -239,6 +240,12 @@ function Home() {
               <span className="text-xs text-slate-500 group-hover/icon:text-sky-400 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">Tailwind CSS</span>
             </div>
 
+            {/* JavaScript - Blue Glow */}
+            <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
+              <SiJavascript className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-yellow-500 group-hover/icon:scale-110" />
+              <span className="text-xs text-slate-500 group-hover/icon:text-yellow-500  opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">JavaScript</span>
+            </div>
+
             {/* TypeScript - Blue Glow */}
             <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
               <SiTypescript className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-blue-500 group-hover/icon:scale-110" />
@@ -279,6 +286,8 @@ function Home() {
         <CoffeeCard className="md:col-span-2 md:row-span-1" />
 
       </motion.div>
+
+      <RoboGuide />
     </div>
   );
 }

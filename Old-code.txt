@@ -337,3 +337,126 @@ export default Card;
 
 My Google Sheets links:-
 https://script.google.com/macros/s/AKfycbzJn9MJDUadx0MyiGuLF3wDfpIZwBO09Btyv8_g7ODxk43PkeQBjffUF_a0N3qbdBv2Lw/exec
+
+RobotGuide.tsx
+import React, { useEffect, useState } from "react";
+import { motion, useScroll, useVelocity, AnimatePresence } from "framer-motion";
+import { Link } from "react-router-dom";
+
+const RobotGuide = () => {
+  const { scrollY, scrollYProgress } = useScroll();
+  const scrollVelocity = useVelocity(scrollY);
+  
+  const [robotState, setRobotState] = useState<'hidden' | 'dizzy' | 'cta'>('hidden');
+  const [showMessage, setShowMessage] = useState(false);
+
+  useEffect(() => {
+    // 1. VELOCITY CHECK (For Fast Scrolling)
+    const unsubscribeVelocity = scrollVelocity.on("change", (latest) => {
+      const speed = Math.abs(latest);
+      
+      // If scrolling super fast (> 3000) and not already at the bottom
+      if (speed > 25000 && robotState !== 'cta') {
+        setRobotState('dizzy');
+        setShowMessage(true);
+        
+        // Hide after 2 seconds if they stop scrolling
+        const timer = setTimeout(() => {
+          setRobotState('hidden');
+          setShowMessage(false);
+        }, 5000);
+        return () => clearTimeout(timer);
+      }
+    });
+
+    // 2. BOTTOM CHECK (For "Let's Work")
+    const unsubscribeProgress = scrollYProgress.on("change", (latest) => {
+      // If user is 99% down the page
+      if (latest > 0.99) {
+        setRobotState('cta');
+        setShowMessage(true);
+      } else if (latest < 0.90 && robotState === 'cta') {
+        // Hide if they scroll back up
+        setRobotState('hidden');
+        setShowMessage(false);
+      }
+    });
+
+    return () => {
+      unsubscribeVelocity();
+      unsubscribeProgress();
+    };
+  }, [scrollVelocity, scrollYProgress, robotState]);
+
+  // ANIMATION VARIANTS
+  const robotVariants = {
+    hidden: { y: 100, opacity: 0, scale: 0 },
+    visible: { y: 0, opacity: 1, scale: 1, transition: { type: "spring", stiffness: 200, damping: 15 } },
+    dizzy: { rotate: [0, -10, 10, -10, 10, 0], transition: { repeat: Infinity, duration: 0.5 } }
+  };
+
+  if (robotState === 'hidden') return null;
+
+  return (
+    <div className="fixed bottom-8 right-8 z-50 flex flex-col items-end gap-2 pointer-events-none">
+      
+      {/* 1. THE MESSAGE BUBBLE */}
+      <AnimatePresence>
+        {showMessage && (
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.8, x: 20 }}
+            animate={{ opacity: 1, scale: 1, x: 0 }}
+            exit={{ opacity: 0, scale: 0.8, x: 20 }}
+            className="bg-white text-slate-900 px-4 py-3 rounded-2xl rounded-br-none shadow-xl border border-cyan-500/20 max-w-[200px] text-xs font-bold mb-2 pointer-events-auto cursor-pointer"
+            onClick={() => {
+                if(robotState === 'cta') {
+                   // Logic for clicking the message at the bottom
+                   // We could redirect or just show a fun alert
+                }
+            }}>
+            {robotState === 'dizzy' ? (
+               <span>Whoa! Slow down, I'm getting dizzy!😵‍💫</span>
+            ) : (
+               <Link to="/contact" className="hover:text-cyan-600 transition-colors">
+                  Yes!! You reached the end!🚀<br/>
+                 <span className="text-cyan-600">Let's work together?<span className="underline">Click Here !!</span></span>
+               </Link>
+            )}
+          </motion.div>
+        )}
+      </AnimatePresence>
+
+      {/* 2. THE ROBOT AVATAR */}
+      <motion.div
+        variants={robotVariants}
+        initial="hidden"
+        animate={robotState === 'dizzy' ? ["visible", "dizzy"] : "visible"}
+        className="w-16 h-16 bg-slate-900 rounded-full border-2 border-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.5)] flex items-center justify-center relative pointer-events-auto cursor-pointer group hover:scale-110 transition-transform"
+        onClick={() => setShowMessage(!showMessage)}
+      >
+         {/* Robot Face (CSS/SVG) */}
+         <div className="relative w-10 h-10">
+            {/* Eyes */}
+            <div className={`absolute top-3 left-1 w-2.5 h-3 bg-cyan-400 rounded-full ${robotState === 'dizzy' ? 'animate-spin' : 'animate-pulse'}`} />
+            <div className={`absolute top-3 right-1 w-2.5 h-3 bg-cyan-400 rounded-full ${robotState === 'dizzy' ? 'animate-spin' : 'animate-pulse'}`} />
+            
+            {/* Mouth */}
+            {robotState === 'dizzy' ? (
+                <div className="absolute bottom-2 left-3 w-4 h-1 bg-white rounded-full rotate-12" />
+            ) : (
+                <div className="absolute bottom-2 left-2 w-6 h-3 border-b-2 border-white rounded-full" />
+            )}
+
+            {/* Antenna */}
+            <div className="absolute -top-4 left-4 w-0.5 h-3 bg-slate-500">
+               <div className="absolute -top-1 -left-1 w-2.5 h-2.5 bg-red-500 rounded-full animate-ping" />
+               <div className="absolute -top-1 -left-1 w-2.5 h-2.5 bg-red-500 rounded-full" />
+            </div>
+         </div>
+      </motion.div>
+
+    </div>
+  );
+};
+
+export default RobotGuide;
