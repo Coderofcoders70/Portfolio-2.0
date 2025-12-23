@@ -1,55 +1,86 @@
 import Card from "./Card";
 import CoffeeCard from "./pages/CoffeeCard";
 import RoboGuide from "./components/RoboGuide"
+import Confetti from "./components/Confetti";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom"; // We use Link instead of <a href> for internal pages
-import { FiMapPin, FiArrowRight } from "react-icons/fi";
+import { Link } from "react-router-dom";
+import { FiMapPin, FiArrowRight, FiHeart } from "react-icons/fi"; // Added FiHeart
 import { MatrixText } from "./components/MatrixText";
 import React, { useState, useEffect } from "react";
 import { SiReact, SiNodedotjs, SiMongodb, SiTailwindcss, SiJavascript, SiTypescript, SiGoogle } from "react-icons/si";
-
 
 const phrases = ["Lakshaya Sharma", "Full Stack Developer", "Backend Developer", "AI-Enthusiast"];
 
 function Home() {
   const [aboutMode, setAboutMode] = useState<'work' | 'life'>('work');
-
-  // --- TYPEWRITER LOGIC START ---
   const [text, setText] = useState('');
   const [isDeleting, setIsDeleting] = useState(false);
   const [loopNum, setLoopNum] = useState(0);
   const [typingSpeed, setTypingSpeed] = useState(150);
 
+  // --- EASTER EGG STATE ---
+  const [isPartyMode, setIsPartyMode] = useState(false);
+  const [keySequence, setKeySequence] = useState<string[]>([]);
+  const SECRET_CODE = "LAKSHAY";
+
+  // --- TYPEWRITER LOGIC ---
   useEffect(() => {
     const handleType = () => {
       const i = loopNum % phrases.length;
       const fullText = phrases[i];
-
-      setText(isDeleting
-        ? fullText.substring(0, text.length - 1)
-        : fullText.substring(0, text.length + 1)
-      );
-
-      // Speed control: Deleting is faster than typing
+      setText(isDeleting ? fullText.substring(0, text.length - 1) : fullText.substring(0, text.length + 1));
       setTypingSpeed(isDeleting ? 50 : 150);
 
       if (!isDeleting && text === fullText) {
-        // Finished typing phrase, wait a bit then start deleting
         setTimeout(() => setIsDeleting(true), 1500);
       } else if (isDeleting && text === '') {
-        // Finished deleting, switch to next phrase
         setIsDeleting(false);
         setLoopNum(loopNum + 1);
       }
     };
-
     const timer = setTimeout(handleType, typingSpeed);
     return () => clearTimeout(timer);
-
   }, [text, isDeleting, loopNum, typingSpeed]);
-  // --- TYPEWRITER LOGIC END ---
 
-  // Animation Variants
+  // --- EASTER EGG & CONSOLE HINT ---
+  useEffect(() => {
+    console.log("%c👀 Psst... Looking for a surprise?", "color: #22d3ee; font-size: 14px; font-weight: bold;");
+    console.log("%cType 'LAKSHAY' or click the Magic Mode in footer...", "color: #e879f9; font-size: 12px;");
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const char = e.key.toUpperCase();
+      setKeySequence(prev => {
+        const newSeq = [...prev, char].slice(-SECRET_CODE.length);
+        if (newSeq.join("") === SECRET_CODE) {
+          triggerParty();
+        }
+        return newSeq;
+      });
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, []);
+
+  // Helper to trigger party (used by Key press AND Button click)
+  const triggerParty = () => {
+    setIsPartyMode(true);
+    console.log("%c🎉 PARTY MODE ACTIVATED! 🎉", "color: orange; font-size: 20px; font-weight: bold;");
+    setTimeout(() => setIsPartyMode(false), 8000);
+  };
+
+  // --- SPOTLIGHT MOUSE TRACKER ---
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const cards = document.getElementsByClassName("spotlight-card");
+    for (const card of cards) {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      (card as HTMLElement).style.setProperty("--mouse-x", `${x}px`);
+      (card as HTMLElement).style.setProperty("--mouse-y", `${y}px`);
+    }
+  };
+
   const containerVariants = {
     hidden: { opacity: 0 },
     show: { opacity: 1, transition: { staggerChildren: 0.1 } },
@@ -60,15 +91,19 @@ function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-200 p-4 md:p-8 font-sans selection:bg-cyan-500/30">
-      <motion.div variants={containerVariants} initial="hidden" animate="show" className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[minmax(180px,auto)]">
+    <div
+      onMouseMove={handleMouseMove}
+      className="min-h-screen bg-slate-950 text-slate-200 p-4 md:p-8 font-sans selection:bg-cyan-500/30 flex flex-col"
+    >
+      {isPartyMode && <Confetti />}
 
-        {/* 1. HERO Card (Updated) */}
+      <motion.div variants={containerVariants} initial="hidden" animate="show" className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[minmax(180px,auto)] mb-12">
+
+        {/* 1. HERO Card */}
         <Card variants={itemVariants} className="md:col-span-2 md:row-span-2 flex flex-col relative overflow-hidden group">
           <div className="absolute -right-20 -top-20 w-64 h-64 bg-cyan-500/20 rounded-full blur-3xl pointer-events-none" />
 
           <div className="flex justify-between items-start z-10">
-            {/* Status Badge */}
             <div className="flex flex-col gap-2">
               <div className="inline-flex items-center gap-2 px-3 py-1 text-xs font-bold text-cyan-300 bg-cyan-950/50 border border-cyan-500/30 rounded-full w-fit">
                 <span className="relative flex h-2 w-2">
@@ -79,15 +114,12 @@ function Home() {
               </div>
             </div>
 
-            {/* Photo with GLOW Effect on Hover */}
             <div className="relative w-20 h-20 md:w-30 md:h-30 rounded-full border-2 border-white/10 bg-white/5 overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_-5px_rgba(34,211,238,0.6)]">
               <img src="/src/assets/my-photo.png" alt="Profile" className="object-cover w-full h-full" />
             </div>
           </div>
 
-
           <div className="mt-auto z-10">
-            {/* UPDATED TYPEWRITER SECTION */}
             <h3 className="text-lg font-mono text-cyan-400 mb-2 font-bold min-h-[28px]">
               Hi, I am <span className="text-cyan-400">{text}</span>
               <span className="animate-pulse text-cyan-400">|</span>
@@ -104,7 +136,6 @@ function Home() {
             </p>
           </div>
 
-          {/* Buttons: Resume & Contact Link */}
           <div className="mt-6 flex gap-3 z-10">
             <Link to="/contact">
               <button className="flex items-center gap-2 bg-slate-100 text-slate-900 px-5 py-2.5 rounded-full font-bold text-sm hover:scale-105 transition-transform active:scale-95">
@@ -113,7 +144,6 @@ function Home() {
               </button>
             </Link>
 
-            {/* RESUME DOWNLOAD BUTTON */}
             <a
               href="src/assets/my-Resume/Lakshaya_Sharma_FullStackDeveloper.pdf"
               download="Lakshaya_Sharma_Resume.pdf"
@@ -124,7 +154,7 @@ function Home() {
           </div>
         </Card>
 
-        {/* 2. ABOUT ME CARD (Updated with Matrix Effect) */}
+        {/* 2. ABOUT ME CARD */}
         <Card variants={itemVariants} className="md:col-span-1 md:row-span-2 flex flex-col">
           <div className="flex justify-between items-center mb-6">
             <h3 className="font-bold text-slate-200">About Me</h3>
@@ -142,7 +172,6 @@ function Home() {
                 </p>
                 <div className="mt-4 p-4 bg-slate-900 rounded-lg border border-green-500/20 shadow-[0_0_15px_-5px_rgba(34,197,94,0.1)]">
                   <p className="text-xs text-slate-500 font-mono mb-2 uppercase tracking-wider">Current Focus:</p>
-                  {/* Using the Matrix Component Here */}
                   <div className="min-h-[24px]">
                     <MatrixText />
                   </div>
@@ -180,15 +209,10 @@ function Home() {
         {/* 5. SEE MY PROJECTS */}
         <Card variants={itemVariants} className="md:col-span-2 md:row-span-2 group cursor-pointer">
           <Link to="/projects" className="h-full w-full flex items-center justify-center relative overflow-hidden">
-
-            {/* Background: Subtle animated gradient */}
             <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-950 to-black z-0" />
             <div className="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 z-0" />
-
-            {/* The Text */}
             <div className="relative z-10 text-center">
               <h2 className="text-5xl md:text-7xl font-black tracking-tighter uppercase">
-                {/* Replaced broken GIF with a reliable Gradient Text */}
                 <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 animate-pulse">
                   See My
                 </span>
@@ -197,8 +221,6 @@ function Home() {
                   Projects
                 </span>
               </h2>
-
-              {/* Decorative Arrow */}
               <div className="mt-4 flex justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform translate-y-4 group-hover:translate-y-0">
                 <div className="bg-white text-black px-6 py-2 rounded-full font-bold flex items-center gap-2">
                   View All <FiArrowRight />
@@ -216,43 +238,30 @@ function Home() {
             </h3>
           </div>
           <div className="flex flex-wrap mt-8 gap-4 justify-start">
-            {/* React - Cyan Glow */}
             <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
               <SiReact className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-cyan-400 group-hover/icon:scale-110 group-hover/icon:drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]" />
               <span className="text-xs text-slate-500 group-hover/icon:text-cyan-300 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">React</span>
             </div>
-
-            {/* Node - Green Glow */}
             <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
               <SiNodedotjs className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-green-500 group-hover/icon:scale-110 group-hover/icon:drop-shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
               <span className="text-xs text-slate-500 group-hover/icon:text-green-400 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">Node</span>
             </div>
-
-            {/* Mongo - Green Glow */}
             <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
               <SiMongodb className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-green-400 group-hover/icon:scale-110" />
               <span className="text-xs text-slate-500 group-hover/icon:text-green-400 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">MongoDB</span>
             </div>
-
-            {/* Tailwind - Sky Glow */}
             <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
               <SiTailwindcss className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-sky-400 group-hover/icon:scale-110" />
               <span className="text-xs text-slate-500 group-hover/icon:text-sky-400 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">Tailwind CSS</span>
             </div>
-
-            {/* JavaScript - Blue Glow */}
             <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
               <SiJavascript className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-yellow-500 group-hover/icon:scale-110" />
               <span className="text-xs text-slate-500 group-hover/icon:text-yellow-500  opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">JavaScript</span>
             </div>
-
-            {/* TypeScript - Blue Glow */}
             <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
               <SiTypescript className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-blue-500 group-hover/icon:scale-110" />
               <span className="text-xs text-slate-500 group-hover/icon:text-blue-500 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">TypeScript</span>
             </div>
-
-            {/* Gemini/Google - Orange Glow */}
             <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
               <SiGoogle className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-orange-400 group-hover/icon:scale-110" />
               <span className="text-xs text-slate-500 group-hover/icon:text-orange-400 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">Gemini</span>
@@ -260,7 +269,17 @@ function Home() {
           </div>
         </Card>
 
-        {/* 7. CONTACT LINK CARD */}
+        {/* 7. COFFEE BREAK CARD */}
+        <CoffeeCard className="md:col-span-2 md:row-span-1" />
+
+        {/* 8. LEARNING CARD */}
+        <Card variants={itemVariants} className="md:col-span-1 md:row-span-1 flex flex-col justify-center">
+          <p className="text-xs text-slate-500 mb-2 font-bold uppercase tracking-wider">Currently Learning</p>
+          <div className="flex justify-between items-end mb-2"><h3 className="font-bold text-xl text-slate-200">Next.js 15</h3><span className="text-xs text-cyan-400 font-bold">75%</span></div>
+          <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden border border-white/5"><div className="bg-gradient-to-r from-cyan-500 to-blue-500 h-full w-[75%] animate-pulse" /></div>
+        </Card>
+
+        {/* 9. CONTACT LINK CARD */}
         <Card variants={itemVariants} className="md:col-span-1 md:row-span-1 bg-gradient-to-br from-purple-600 to-indigo-600 border-none relative overflow-hidden group">
           <Link to="/contact" className="h-full w-full flex flex-col justify-between p-1">
             <div className="flex justify-end">
@@ -275,17 +294,21 @@ function Home() {
           </Link>
         </Card>
 
-        {/* 8. LEARNING CARD */}
-        <Card variants={itemVariants} className="md:col-span-1 md:row-span-1 flex flex-col justify-center">
-          <p className="text-xs text-slate-500 mb-2 font-bold uppercase tracking-wider">Currently Learning</p>
-          <div className="flex justify-between items-end mb-2"><h3 className="font-bold text-xl text-slate-200">Next.js 15</h3><span className="text-xs text-cyan-400 font-bold">75%</span></div>
-          <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden border border-white/5"><div className="bg-gradient-to-r from-cyan-500 to-blue-500 h-full w-[75%] animate-pulse" /></div>
-        </Card>
-
-        {/* 9. COFFEE BREAK CARD (New Addition) */}
-        <CoffeeCard className="md:col-span-2 md:row-span-1" />
-
       </motion.div>
+
+      {/* --- NEW FOOTER SECTION --- */}
+      <footer className="mt-auto py-8 text-center text-slate-500 text-sm flex flex-col md:flex-row justify-center items-center gap-4">
+        <p className="flex items-center gap-2">
+          Designed & Built with <FiHeart className="text-red-500 fill-red-500 animate-pulse" /> by Lakshaya Sharma
+        </p>
+        <span className="hidden md:block text-slate-700">|</span>
+        <button
+          onClick={triggerParty}
+          className="text-cyan-400 hover:text-cyan-300 font-bold transition-colors animate-pulse"
+        >
+          ✨ Magic Mode
+        </button>
+      </footer>
 
       <RoboGuide />
     </div>
