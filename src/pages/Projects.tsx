@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import Card from "../Card";
+import Card from "../components/Card";
 import { FiArrowLeft, FiGithub, FiExternalLink } from "react-icons/fi";
 
 // --- REUSABLE PROJECT CARD COMPONENT ---

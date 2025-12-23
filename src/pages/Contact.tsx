@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Card from "./Card";
+import Card from "../components/Card";
 import { FiMail, FiMapPin, FiGithub, FiLinkedin, FiInstagram, FiArrowLeft, FiCheckCircle, FiLoader } from "react-icons/fi";
 
 const Contact = () => {
@@ -23,7 +23,7 @@ const Contact = () => {
       setSubmitted(true);
       form.reset();
     } catch (error) {
-      console.error("Error!", error.message);
+      console.error("Error!", error instanceof Error ? error.message : String(error));
       // Even if there's a CORS error, Google Scripts usually still save the data.
       // So we often treat it as success or log it.
       setSubmitted(true); 

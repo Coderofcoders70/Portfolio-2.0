@@ -1,5 +1,5 @@
-import Card from "../Card";
-import React, { useState, useEffect } from "react";
+import Card from "./Card";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiRefreshCw, FiCoffee, FiSmile } from "react-icons/fi";
 

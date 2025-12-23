@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 // --- MATRIX TEXT COMPONENT (New!) ---
 // This component handles the "scramble" effect for the focus area
@@ -16,10 +16,10 @@ export const MatrixText = () => {
     // The "Scramble" Logic
     const scramble = () => {
       interval = setInterval(() => {
-        setDisplayText(prev => 
+        setDisplayText(() => 
           currentWord
             .split("")
-            .map((letter, i) => {
+            .map((_letter, i) => {
               if (i < iteration) return currentWord[i];
               return chars[Math.floor(Math.random() * chars.length)];
             })

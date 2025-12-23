@@ -1,11 +1,11 @@
-import Card from "./Card";
-import CoffeeCard from "./pages/CoffeeCard";
-import StatusCorner from "./components/StatusCorner";
-import Confetti from "./components/Confetti";
-import { motion } from "framer-motion";
+import Card from "../components/Card";
+import CoffeeCard from "../components/CoffeeCard";
+import StatusCorner from "../components/StatusCorner";
+import Confetti from "../components/Confetti";
+import { motion, type Variants } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FiMapPin, FiArrowRight, FiHeart } from "react-icons/fi"; // Added FiHeart
-import { MatrixText } from "./components/MatrixText";
+import { MatrixText } from "../components/MatrixText";
 import React, { useState, useEffect } from "react";
 import { SiHtml5, SiReact, SiNodedotjs, SiMongodb, SiTailwindcss, SiJavascript, SiTypescript, SiCss3 } from "react-icons/si";
 
@@ -20,7 +20,7 @@ function Home() {
 
   // --- EASTER EGG STATE ---
   const [isPartyMode, setIsPartyMode] = useState(false);
-  const [keySequence, setKeySequence] = useState<string[]>([]);
+  const [, setKeySequence] = useState<string[]>([]);
   const SECRET_CODE = "LAKSHAYA";
 
   // --- TYPEWRITER LOGIC ---
@@ -81,11 +81,11 @@ function Home() {
     }
   };
 
-  const containerVariants = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     show: { opacity: 1, transition: { staggerChildren: 0.1 } },
   };
-  const itemVariants = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 50 },
     show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50, damping: 20 } },
   };
