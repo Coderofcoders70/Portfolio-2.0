@@ -1,13 +1,13 @@
 import Card from "./Card";
 import CoffeeCard from "./pages/CoffeeCard";
-import RoboGuide from "./components/RoboGuide"
+import StatusCorner from "./components/StatusCorner";
 import Confetti from "./components/Confetti";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { FiMapPin, FiArrowRight, FiHeart } from "react-icons/fi"; // Added FiHeart
 import { MatrixText } from "./components/MatrixText";
 import React, { useState, useEffect } from "react";
-import { SiReact, SiNodedotjs, SiMongodb, SiTailwindcss, SiJavascript, SiTypescript, SiGoogle } from "react-icons/si";
+import { SiHtml5, SiReact, SiNodedotjs, SiMongodb, SiTailwindcss, SiJavascript, SiTypescript, SiCss3 } from "react-icons/si";
 
 const phrases = ["Lakshaya Sharma", "Full Stack Developer", "Backend Developer", "AI-Enthusiast"];
 
@@ -239,6 +239,14 @@ function Home() {
           </div>
           <div className="flex flex-wrap mt-8 gap-4 justify-start">
             <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
+              <SiHtml5 className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-orange-400 group-hover/icon:scale-110 group-hover/icon:drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]" />
+              <span className="text-xs text-slate-500 group-hover/icon:text-orange-300 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">Html 5</span>
+            </div>
+            <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
+              <SiCss3 className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-blue-400 group-hover/icon:scale-110" />
+              <span className="text-xs text-slate-500 group-hover/icon:text-blue-400 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">CSS</span>
+            </div>
+            <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
               <SiReact className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-cyan-400 group-hover/icon:scale-110 group-hover/icon:drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]" />
               <span className="text-xs text-slate-500 group-hover/icon:text-cyan-300 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">React</span>
             </div>
@@ -261,10 +269,6 @@ function Home() {
             <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
               <SiTypescript className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-blue-500 group-hover/icon:scale-110" />
               <span className="text-xs text-slate-500 group-hover/icon:text-blue-500 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">TypeScript</span>
-            </div>
-            <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
-              <SiGoogle className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-orange-400 group-hover/icon:scale-110" />
-              <span className="text-xs text-slate-500 group-hover/icon:text-orange-400 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">Gemini</span>
             </div>
           </div>
         </Card>
@@ -310,7 +314,7 @@ function Home() {
         </button>
       </footer>
 
-      <RoboGuide />
+      <StatusCorner />
     </div>
   );
 }

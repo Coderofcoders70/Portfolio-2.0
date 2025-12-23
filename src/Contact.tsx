@@ -72,9 +72,9 @@ const Contact = () => {
 
              {/* SOCIAL LINKS */}
              <div className="flex items-center gap-4 p-4 bg-slate-900/50 rounded-2xl border border-white/5">
-                <a href="https://github.com/YOUR_GITHUB" target="_blank" rel="noreferrer" className="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center text-pink-400 hover:scale-110 hover:bg-slate-700 transition-all cursor-pointer"><FiGithub /></a>
-                <a href="https://linkedin.com/in/YOUR_LINKEDIN" target="_blank" rel="noreferrer" className="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center text-pink-400 hover:scale-110 hover:bg-slate-700 transition-all cursor-pointer"><FiLinkedin /></a>
-                <a href="https://instagram.com/YOUR_INSTAGRAM" target="_blank" rel="noreferrer" className="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center text-pink-400 hover:scale-110 hover:bg-slate-700 transition-all cursor-pointer"><FiInstagram /></a>
+                <a href="https://github.com/Coderofcoders70" target="_blank" rel="noreferrer" className="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center text-pink-400 hover:scale-110 hover:bg-slate-700 transition-all cursor-pointer"><FiGithub /></a>
+                <a href="https://www.linkedin.com/in/lakshaya-sharma-162612226/" target="_blank" rel="noreferrer" className="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center text-pink-400 hover:scale-110 hover:bg-slate-700 transition-all cursor-pointer"><FiLinkedin /></a>
+                <a href="https://www.instagram.com/lakshaya_sh003/" target="_blank" rel="noreferrer" className="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center text-pink-400 hover:scale-110 hover:bg-slate-700 transition-all cursor-pointer"><FiInstagram /></a>
              </div>
           </div>
         </Card>
