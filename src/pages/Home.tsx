@@ -1,46 +1,21 @@
+import { Hero } from "./Hero";
+import { About } from "./About";
 import Card from "../components/Card";
-import CoffeeCard from "../components/CoffeeCard";
-import StatusCorner from "../components/StatusCorner";
-import Confetti from "../components/Confetti";
-import { motion, type Variants } from "framer-motion";
 import { Link } from "react-router-dom";
-import { FiMapPin, FiArrowRight, FiHeart } from "react-icons/fi"; // Added FiHeart
-import { MatrixText } from "../components/MatrixText";
+import Confetti from "../components/Confetti";
+import CoffeeCard from "../components/CoffeeCard";
 import React, { useState, useEffect } from "react";
-import { SiHtml5, SiReact, SiNodedotjs, SiMongodb, SiTailwindcss, SiJavascript, SiTypescript, SiCss3 } from "react-icons/si";
-
-const phrases = ["Lakshaya Sharma", "Full Stack Developer", "Backend Developer", "AI-Enthusiast"];
+import { TechStack } from "../components/TechStack";
+import StatusCorner from "../components/StatusCorner";
+import { motion, type Variants } from "framer-motion";
+import { FiMapPin, FiArrowRight, FiHeart } from "react-icons/fi"; 
 
 function Home() {
-  const [aboutMode, setAboutMode] = useState<'work' | 'life'>('work');
-  const [text, setText] = useState('');
-  const [isDeleting, setIsDeleting] = useState(false);
-  const [loopNum, setLoopNum] = useState(0);
-  const [typingSpeed, setTypingSpeed] = useState(150);
 
   // --- EASTER EGG STATE ---
   const [isPartyMode, setIsPartyMode] = useState(false);
   const [, setKeySequence] = useState<string[]>([]);
   const SECRET_CODE = "LAKSHAYA";
-
-  // --- TYPEWRITER LOGIC ---
-  useEffect(() => {
-    const handleType = () => {
-      const i = loopNum % phrases.length;
-      const fullText = phrases[i];
-      setText(isDeleting ? fullText.substring(0, text.length - 1) : fullText.substring(0, text.length + 1));
-      setTypingSpeed(isDeleting ? 50 : 150);
-
-      if (!isDeleting && text === fullText) {
-        setTimeout(() => setIsDeleting(true), 1500);
-      } else if (isDeleting && text === '') {
-        setIsDeleting(false);
-        setLoopNum(loopNum + 1);
-      }
-    };
-    const timer = setTimeout(handleType, typingSpeed);
-    return () => clearTimeout(timer);
-  }, [text, isDeleting, loopNum, typingSpeed]);
 
   // --- EASTER EGG & CONSOLE HINT ---
   useEffect(() => {
@@ -85,6 +60,7 @@ function Home() {
     hidden: { opacity: 0 },
     show: { opacity: 1, transition: { staggerChildren: 0.1 } },
   };
+
   const itemVariants: Variants = {
     hidden: { opacity: 0, y: 50 },
     show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50, damping: 20 } },
@@ -100,94 +76,10 @@ function Home() {
       <motion.div variants={containerVariants} initial="hidden" animate="show" className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[minmax(180px,auto)] mb-12">
 
         {/* 1. HERO Card */}
-        <Card variants={itemVariants} className="md:col-span-2 md:row-span-2 flex flex-col relative overflow-hidden group">
-          <div className="absolute -right-20 -top-20 w-64 h-64 bg-cyan-500/20 rounded-full blur-3xl pointer-events-none" />
-
-          <div className="flex justify-between items-start z-10">
-            <div className="flex flex-col gap-2">
-              <div className="inline-flex items-center gap-2 px-3 py-1 text-xs font-bold text-cyan-300 bg-cyan-950/50 border border-cyan-500/30 rounded-full w-fit">
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-cyan-500"></span>
-                </span>
-                Available for work
-              </div>
-            </div>
-
-            <div className="relative w-20 h-20 md:w-30 md:h-30 rounded-full border-2 border-white/10 bg-white/5 overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_-5px_rgba(34,211,238,0.6)]">
-              <img src="/src/assets/my-photo.png" alt="Profile" className="object-cover w-full h-full" />
-            </div>
-          </div>
-
-          <div className="mt-auto z-10">
-            <h3 className="text-lg font-mono text-cyan-400 mb-2 font-bold min-h-[28px]">
-              Hi, I am <span className="text-cyan-400">{text}</span>
-              <span className="animate-pulse text-cyan-400">|</span>
-            </h3>
-
-            <h1 className="text-4xl md:text-5xl font-bold leading-tight">
-              <span className="text-slate-100">Building </span>
-              <span className="bg-clip-text text-transparent bg-gradient-to-r from-cyan-400 to-purple-400">digital products</span>
-              <br />
-              <span className="text-slate-400 text-3xl md:text-4xl">that feel alive.</span>
-            </h1>
-            <p className="mt-4 text-slate-500 text-sm md:text-base max-w-sm">
-              Full Stack Developer specializing in MERN & Creative UI.
-            </p>
-          </div>
-
-          <div className="mt-6 flex gap-3 z-10">
-            <Link to="/contact">
-              <button className="flex items-center gap-2 bg-slate-100 text-slate-900 px-5 py-2.5 rounded-full font-bold text-sm hover:scale-105 transition-transform active:scale-95">
-                Let's Talk
-                <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 11L11 1M11 1H1M11 1V11" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" /></svg>
-              </button>
-            </Link>
-
-            <a
-              href="src/assets/my-Resume/Lakshaya_Sharma_FullStackDeveloper.pdf"
-              download="Lakshaya_Sharma_Resume.pdf"
-              className="px-5 py-2.5 rounded-full font-bold text-sm text-slate-300 border border-white/10 hover:bg-white/5 transition-colors cursor-pointer"
-            >
-              My Resume ⬇
-            </a>
-          </div>
-        </Card>
+        <Hero />
 
         {/* 2. ABOUT ME CARD */}
-        <Card variants={itemVariants} className="md:col-span-1 md:row-span-2 flex flex-col">
-          <div className="flex justify-between items-center mb-6">
-            <h3 className="font-bold text-slate-200">About Me</h3>
-            <div className="flex bg-slate-800 p-1 rounded-full border border-white/5">
-              <button onClick={() => setAboutMode('work')} className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${aboutMode === 'work' ? 'bg-slate-600 text-white shadow-lg' : 'text-slate-500 hover:text-slate-300'}`}>Work</button>
-              <button onClick={() => setAboutMode('life')} className={`px-3 py-1 rounded-full text-xs font-bold transition-all ${aboutMode === 'life' ? 'bg-cyan-600 text-white shadow-lg' : 'text-slate-500 hover:text-slate-300'}`}>Life</button>
-            </div>
-          </div>
-          <div className="relative h-full">
-            {aboutMode === 'work' ? (
-              <div key="work" className="animate-in fade-in slide-in-from-bottom-2 duration-300">
-                <p className="text-slate-400 leading-relaxed mb-4">I am a <span className="text-white font-bold">Full Stack Engineer</span> focused on scalable backends and intuitive frontend architectures.</p>
-                <p className="text-slate-400 leading-relaxed">
-                  My strength lies in bridging the gap between <span className="text-cyan-400">complex logic</span> and <span className="text-purple-400">pixel-perfect design</span>.
-                </p>
-                <div className="mt-4 p-4 bg-slate-900 rounded-lg border border-green-500/20 shadow-[0_0_15px_-5px_rgba(34,197,94,0.1)]">
-                  <p className="text-xs text-slate-500 font-mono mb-2 uppercase tracking-wider">Current Focus:</p>
-                  <div className="min-h-[24px]">
-                    <MatrixText />
-                  </div>
-                </div>
-              </div>
-            ) : (
-              <div key="life" className="animate-in fade-in slide-in-from-bottom-2 duration-300">
-                <p className="text-slate-400 leading-relaxed mb-4">When I'm not coding, I'm usually exploring <span className="text-orange-400">new tech trends</span> or refining my UI/UX taste.</p>
-                <p className="text-slate-400 leading-relaxed">
-                  I believe in <span className="text-white italic">"Shipping fast and breaking things"</span> (but fixing them faster).
-                </p>
-                <ul className="mt-4 space-y-2 text-sm text-slate-500"><li>🎧 Lo-fi Music Playlists</li><li>☕ Black Coffee</li><li>🚀 Startup Enthusiast</li></ul>
-              </div>
-            )}
-          </div>
-        </Card>
+        <About />
 
         {/* 3. EDUCATION */}
         <Card variants={itemVariants} className="md:col-span-1 md:row-span-1 flex flex-col justify-center items-center text-center group">
@@ -206,7 +98,7 @@ function Home() {
           <p className="text-xs text-slate-500">Remote Ready</p>
         </Card>
 
-        {/* 5. SEE MY PROJECTS */}
+        {/* 5. MY PROJECTS */}
         <Card variants={itemVariants} className="md:col-span-2 md:row-span-2 group cursor-pointer">
           <Link to="/projects" className="h-full w-full flex items-center justify-center relative overflow-hidden">
             <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-slate-950 to-black z-0" />
@@ -231,47 +123,7 @@ function Home() {
         </Card>
 
         {/* 6. TECH STACK */}
-        <Card variants={itemVariants} className="md:col-span-2 md:row-span-1 flex flex-col justify-center gap-4">
-          <div className="flex justify-between items-center">
-            <h3 className="text-slate-400 text-sm font-bold uppercase tracking-wider">
-              Tech Stack
-            </h3>
-          </div>
-          <div className="flex flex-wrap mt-8 gap-4 justify-start">
-            <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
-              <SiHtml5 className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-orange-400 group-hover/icon:scale-110 group-hover/icon:drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]" />
-              <span className="text-xs text-slate-500 group-hover/icon:text-orange-300 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">Html 5</span>
-            </div>
-            <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
-              <SiCss3 className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-blue-400 group-hover/icon:scale-110" />
-              <span className="text-xs text-slate-500 group-hover/icon:text-blue-400 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">CSS</span>
-            </div>
-            <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
-              <SiReact className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-cyan-400 group-hover/icon:scale-110 group-hover/icon:drop-shadow-[0_0_10px_rgba(34,211,238,0.5)]" />
-              <span className="text-xs text-slate-500 group-hover/icon:text-cyan-300 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">React</span>
-            </div>
-            <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
-              <SiNodedotjs className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-green-500 group-hover/icon:scale-110 group-hover/icon:drop-shadow-[0_0_10px_rgba(34,197,94,0.5)]" />
-              <span className="text-xs text-slate-500 group-hover/icon:text-green-400 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">Node</span>
-            </div>
-            <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
-              <SiMongodb className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-green-400 group-hover/icon:scale-110" />
-              <span className="text-xs text-slate-500 group-hover/icon:text-green-400 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">MongoDB</span>
-            </div>
-            <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
-              <SiTailwindcss className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-sky-400 group-hover/icon:scale-110" />
-              <span className="text-xs text-slate-500 group-hover/icon:text-sky-400 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">Tailwind CSS</span>
-            </div>
-            <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
-              <SiJavascript className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-yellow-500 group-hover/icon:scale-110" />
-              <span className="text-xs text-slate-500 group-hover/icon:text-yellow-500  opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">JavaScript</span>
-            </div>
-            <div className="group/icon flex flex-col items-center gap-2 cursor-pointer">
-              <SiTypescript className="text-4xl text-slate-600 transition-all duration-300 group-hover/icon:text-blue-500 group-hover/icon:scale-110" />
-              <span className="text-xs text-slate-500 group-hover/icon:text-blue-500 opacity-0 group-hover/icon:opacity-100 transition-opacity absolute mt-12">TypeScript</span>
-            </div>
-          </div>
-        </Card>
+        <TechStack />
 
         {/* 7. COFFEE BREAK CARD */}
         <CoffeeCard className="md:col-span-2 md:row-span-1" />
