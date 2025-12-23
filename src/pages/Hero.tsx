@@ -3,7 +3,7 @@ import { type Variants } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-const phrases = ["Lakshaya Sharma", "Full Stack Developer", "Backend Developer", "AI-Enthusiast"];
+const phrases = ["Lakshaya Sharma", "Full Stack Developer", "Frontend Developer", "Backend Developer", "AI-Enthusiast"];
 
 export function Hero() {
 
