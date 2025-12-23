@@ -95,7 +95,7 @@ function Home() {
         <Card variants={itemVariants} className="md:col-span-1 md:row-span-1 flex flex-col justify-center items-center">
           <FiMapPin className="text-3xl text-pink-500 mb-2" />
           <h3 className="font-bold">India</h3>
-          <p className="text-xs text-slate-500">Remote Ready</p>
+          <p className="text-xs text-slate-500">Onsite/Remote Ready</p>
         </Card>
 
         {/* 5. MY PROJECTS */}
