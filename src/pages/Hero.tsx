@@ -3,7 +3,11 @@ import { type Variants } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
-const phrases = ["Lakshaya Sharma", "Full Stack Developer", "Backend Developer", "AI-Enthusiast"];
+const HERO_CONFIG = {
+    typeWriterPhrases: ["Lakshaya Sharma", "Full Stack Developer", "Frontend Developer", "Backend Developer", "AI-Enthusiast"],
+    resumeLink: "src/assets/my-Resume/Lakshaya_Sharma_FullStackDeveloper.pdf",
+    profileImg: "/my-photo.png",
+};
 
 export function Hero() {
 
@@ -15,8 +19,8 @@ export function Hero() {
     // --- TYPEWRITER LOGIC ---
     useEffect(() => {
         const handleType = () => {
-            const i = loopNum % phrases.length;
-            const fullText = phrases[i];
+            const i = loopNum % HERO_CONFIG.typeWriterPhrases.length;
+            const fullText = HERO_CONFIG.typeWriterPhrases[i];
             setText(isDeleting ? fullText.substring(0, text.length - 1) : fullText.substring(0, text.length + 1));
             setTypingSpeed(isDeleting ? 50 : 150);
 
@@ -54,7 +58,7 @@ export function Hero() {
                     </div>
 
                     <div className="relative w-20 h-20 md:w-30 md:h-30 rounded-full border-2 border-white/10 bg-white/5 overflow-hidden transition-all duration-500 hover:scale-105 hover:shadow-[0_0_40px_-5px_rgba(34,211,238,0.6)]">
-                        <img src="/my-photo.png" alt="Profile" className="object-cover w-full h-full" />
+                        <img src={HERO_CONFIG.profileImg} alt="Profile" className="object-cover w-full h-full" />
                     </div>
                 </div>
 
@@ -84,7 +88,7 @@ export function Hero() {
                     </Link>
 
                     <a
-                        href="src/assets/my-Resume/Lakshaya_Sharma_FullStackDeveloper.pdf"
+                        href={HERO_CONFIG.resumeLink}
                         download="Lakshaya_Sharma_Resume.pdf"
                         className="px-5 py-2.5 rounded-full font-bold text-sm text-slate-300 border border-white/10 hover:bg-white/5 transition-colors cursor-pointer"
                     >

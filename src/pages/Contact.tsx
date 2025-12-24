@@ -66,7 +66,7 @@ const Contact = () => {
                 <div className="w-10 h-10 bg-slate-800 rounded-full flex items-center justify-center text-pink-400"><FiMapPin /></div>
                 <div>
                    <p className="text-xs text-slate-500">Location</p>
-                   <p className="font-bold">India (Remote)</p>
+                   <p className="font-bold">India (Onsite/Remote)</p>
                 </div>
              </div>
 

@@ -10,6 +10,11 @@ import StatusCorner from "../components/StatusCorner";
 import { motion, type Variants } from "framer-motion";
 import { FiMapPin, FiArrowRight, FiHeart } from "react-icons/fi"; 
 
+const HOME_CONFIG = {
+  secretCode: "LAKSHAYA",
+  partyDuration: 8000,
+};
+
 function Home() {
 
   // --- EASTER EGG STATE ---
@@ -26,7 +31,7 @@ function Home() {
       const char = e.key.toUpperCase();
       setKeySequence(prev => {
         const newSeq = [...prev, char].slice(-SECRET_CODE.length);
-        if (newSeq.join("") === SECRET_CODE) {
+        if (newSeq.join("") === HOME_CONFIG.secretCode) {
           triggerParty();
         }
         return newSeq;
@@ -41,7 +46,7 @@ function Home() {
   const triggerParty = () => {
     setIsPartyMode(true);
     console.log("%c🎉 PARTY MODE ACTIVATED! 🎉", "color: orange; font-size: 20px; font-weight: bold;");
-    setTimeout(() => setIsPartyMode(false), 8000);
+    setTimeout(() => setIsPartyMode(false), HOME_CONFIG.partyDuration);
   };
 
   // --- SPOTLIGHT MOUSE TRACKER ---
@@ -95,7 +100,7 @@ function Home() {
         <Card variants={itemVariants} className="md:col-span-1 md:row-span-1 flex flex-col justify-center items-center">
           <FiMapPin className="text-3xl text-pink-500 mb-2" />
           <h3 className="font-bold">India</h3>
-          <p className="text-xs text-slate-500">Remote Ready</p>
+          <p className="text-xs text-slate-500">Onsite/Remote Ready</p>
         </Card>
 
         {/* 5. MY PROJECTS */}

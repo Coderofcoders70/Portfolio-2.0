@@ -2,6 +2,24 @@ import { useEffect, useState } from "react";
 import { motion, useScroll, useVelocity, useTransform, AnimatePresence } from "framer-motion";
 import { Link } from "react-router-dom";
 
+const ROBOT_CONFIG = {
+  messages: {
+    dizzy: "Whoa! Slow down, getting dizzy! 😵‍💫",
+    polite: "Please check my work properly... presented with love! ❤️",
+    cta: "Yes!! You reached the end! 🚀",
+    robotMsgUnderlined: "Let's work together?" 
+  }, 
+  timing: {
+    autoHideDuration: 8000,
+    dizzyDuration: 3000
+  }, 
+  colors: {
+    cyan: "#22d3ee",
+    purple: "#a855f7",
+    red: "#ef4444",
+  },
+};
+
 const StatusCorner = () => {
   // --- 1. SHARED SCROLL LOGIC ---
   const { scrollY, scrollYProgress } = useScroll();
@@ -18,12 +36,12 @@ const StatusCorner = () => {
       if (speed > 25000 && robotState === 'hidden') {
         setRobotState('dizzy');
         setShowRobotMessage(true);
-        setTimeout(() => setRobotState('polite'), 3000);
+        setTimeout(() => setRobotState('polite'), ROBOT_CONFIG.timing.dizzyDuration);
         setTimeout(() => {
            // If we are not at the bottom (CTA), go back to hidden (Loader)
            setRobotState((prev) => prev === 'cta' ? 'cta' : 'hidden');
            setShowRobotMessage(false);
-        }, 8000);
+        }, ROBOT_CONFIG.timing.autoHideDuration);
       }
     });
 
@@ -49,7 +67,7 @@ const StatusCorner = () => {
   const rotateZ = useTransform(scrollYProgress, [0, 1], [0, 360]);
   const rotateX = useTransform(scrollYProgress, [0, 1], [0, 180]);
   const rotateY = useTransform(scrollYProgress, [0, 1], [0, -360]);
-  const glowColor = useTransform(scrollYProgress, [0, 0.5, 1], ["#22d3ee", "#a855f7", "#ef4444"]);
+  const glowColor = useTransform(scrollYProgress, [0, 0.5, 1], [ROBOT_CONFIG.colors.cyan, ROBOT_CONFIG.colors.purple, ROBOT_CONFIG.colors.red]);
 
   return (
     <div className="fixed bottom-8 right-8 z-50 flex flex-col items-end gap-2 pointer-events-none">
@@ -63,12 +81,13 @@ const StatusCorner = () => {
             exit={{ opacity: 0, scale: 0.8, y: 10 }}
             className="relative bg-white text-slate-900 px-6 py-4 rounded-[2rem] rounded-br-none shadow-2xl border-2 border-cyan-500/20 max-w-[220px] text-xs font-bold mb-3 pointer-events-auto cursor-pointer"
           >
-             {robotState === 'dizzy' && <span>Whoa! Slow down, getting dizzy! 😵‍💫</span>}
-             {robotState === 'polite' && <span className="text-pink-600">Please check my work properly... presented with love! ❤️</span>}
+             {robotState === 'dizzy' && <span>{ROBOT_CONFIG.messages.dizzy}</span>}
+             {robotState === 'polite' && <span className="text-pink-600">{ROBOT_CONFIG.messages.polite}</span>}
              {robotState === 'cta' && (
                 <Link to="/contact" className="hover:text-cyan-600 transition-colors block">
-                   Yes!! You reached the end! 🚀<br/>
-                   <span className="text-cyan-600 mt-1 block underline decoration-wavy">Let's work together?</span>
+                  {ROBOT_CONFIG.messages.cta}
+                  <br/>
+                  <span className="text-cyan-600 mt-1 block underline decoration-wavy">{ROBOT_CONFIG.messages.robotMsgUnderlined}</span>
                 </Link>
              )}
              {/* Cloud Tail */}
