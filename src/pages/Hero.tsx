@@ -3,11 +3,15 @@ import { type Variants } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 
+<<<<<<< HEAD
 const HERO_CONFIG = {
     typeWriterPhrases: ["Lakshaya Sharma", "Full Stack Developer", "Frontend Developer", "Backend Developer", "AI-Enthusiast"],
     resumeLink: "src/assets/my-Resume/Lakshaya_Sharma_FullStackDeveloper.pdf",
     profileImg: "/my-photo.png",
 };
+=======
+const phrases = ["Lakshaya Sharma", "Full Stack Developer", "Frontend Developer", "Backend Developer", "AI-Enthusiast"];
+>>>>>>> d7a90bc624ff89f636fd0f234580e49a7cd885d5
 
 export function Hero() {
 
