@@ -128,7 +128,7 @@ const Projects = () => {
             title="Smart Bot"
             description="A full-stack AI chat interface powered by Gemini. Features real-time socket communication and persistent chat history."
             tags={["React", "Node.js", "Gemini AI", "Socket.io"]}
-            liveLink="https://github.com/Coderofcoders70/Smartbot-frontend" // <-- ADD YOUR LINK
+            liveLink="https://smartbot-museai.vercel.app/" // <-- ADD YOUR LINK
             githubLink="https://github.com/Coderofcoders70/Smartbot-frontend" // <-- ADD YOUR LINK
             className="mt-10 md:col-span-2 lg:col-span-2"
             variants={itemVariants}
