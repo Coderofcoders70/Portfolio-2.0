@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 // --- MATRIX TEXT COMPONENT (New!) ---
 // This component handles the "scramble" effect for the focus area
 export const MatrixText = () => {
-  const words = ["System Design", "AI Agents", "Scalable Architecture", "Real-time Ops"];
+  const words = ["System Design", "AI Agents", "Scalable Arch", "Real-time Ops"];
   const [currentWord, setCurrentWord] = useState(words[0]);
   const [displayText, setDisplayText] = useState(words[0]);
   const [index, setIndex] = useState(0);

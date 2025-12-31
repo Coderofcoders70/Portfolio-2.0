@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 const HERO_CONFIG = {
     typeWriterPhrases: ["Lakshaya Sharma", "Full Stack Developer", "Frontend Developer", "Backend Developer", "AI-Enthusiast"],
     resumeLink: "src/assets/my-Resume/Lakshaya_Sharma_FullStackDeveloper.pdf",
-    profileImg: "src/assets/my-photo.png",
+    profileImg: "/my-photo.png",
 };
 
 export function Hero() {
