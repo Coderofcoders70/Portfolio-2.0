@@ -25,7 +25,7 @@ function Home() {
   // --- EASTER EGG & CONSOLE HINT ---
   useEffect(() => {
     console.log("%c👀 Psst... Looking for a surprise?", "color: #22d3ee; font-size: 14px; font-weight: bold;");
-    console.log("%cType 'LAKSHAY' or click the Magic Mode in footer...", "color: #e879f9; font-size: 12px;");
+    console.log("%cType 'LAKSHAYA' or click the Magic Mode in footer...", "color: #e879f9; font-size: 12px;");
 
     const handleKeyDown = (e: KeyboardEvent) => {
       const char = e.key.toUpperCase();
