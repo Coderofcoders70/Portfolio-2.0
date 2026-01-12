@@ -64,7 +64,7 @@ export function Hero() {
 
                 <div className="mt-auto z-10">
                     <h3 className="text-lg font-mono text-cyan-400 mb-2 font-bold min-h-[28px]">
-                        Hi, I am <span className="text-cyan-400">{text}</span>
+                        Namaste, I am <span className="text-cyan-400">{text}</span>
                         <span className="animate-pulse text-cyan-400">|</span>
                     </h3>
 
