@@ -5,13 +5,22 @@ import type { HTMLMotionProps } from "framer-motion";
 interface CardProps extends HTMLMotionProps<"div"> {
   children: React.ReactNode;
   className?: string;
+  variants?: any;
 }
 
-const Card: React.FC<CardProps> = ({ children, className = "", ...props }) => {
+const Card: React.FC<CardProps> = ({ children, className = "", variants, ...props }) => {
   return (
     <motion.div
       whileHover={{ scale: 1.02 }}
+      variants={variants}
       {...props}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ 
+        once: false,      // Set to false so it fades OUT when you scroll past
+        amount: 0.2,      // Starts animation when 20% of card is visible
+        margin: "-50px"   // Adds a small buffer
+      }}
       // Added 'spotlight-card' class here for the mouse tracking to find
       className={`spotlight-card relative group rounded-3xl p-[1px] overflow-hidden ${className}`}
     >

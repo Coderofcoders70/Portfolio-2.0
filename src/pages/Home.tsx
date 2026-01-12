@@ -67,8 +67,8 @@ function Home() {
   };
 
   const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 50 },
-    show: { opacity: 1, y: 0, transition: { type: "spring", stiffness: 50, damping: 20 } },
+    hidden: { opacity: 0, y: 20, filter: "blur(10px)", scale: 0.95 },
+    show: { opacity: 1, y: 0, filter: "blur(0px)", scale: 1, transition: { type: "spring", stiffness: 50, damping: 20 } },
   };
 
   return (
